@@ -18,7 +18,19 @@ import flet as ft
 def main(pagina): # Criar a funcção main
     texto = ft.Text("Hashzap")
 
-    popup = ft.AlertDialog()
+    def entrar_chat(evento):
+        print("Entrar no chat")
+
+    titulo_popup = ft.Text("Bem vindo ao Hashzap")
+    nome_usuario = ft.TextField(label="Escreva o seu nome no chat")
+    botao_entrar = ft.ElevatedButton('Entrar no chat', on_click=entrar_chat)
+    popup = ft.AlertDialog(
+        open=False,
+        modal=True,
+        title=titulo_popup,
+        content=nome_usuario,
+        actions=[botao_entrar]
+    )
 
     def abrir_popup(evento):
         pagina.dialog = popup
