@@ -10,4 +10,18 @@
     # campo: Digite sua mensagem
     # Botão: enviar
 
-# Flat -> Framework do Python
+# Flet -> Framework do Python
+# pip intall flet
+
+import flet as ft
+
+def main(pagina): # Criar a funcção main
+    texto = ft.Text("Hashzap")
+    def abrir_popup(evento):
+        pass
+
+    botao_iniciar = ft.ElevatedButton("Iniciar Chat", on_click=abrir_popup)
+    pagina.add(texto)
+    pagina.add(botao_iniciar)
+
+ft.app(target=main) # Criar o app chamando a função principal
