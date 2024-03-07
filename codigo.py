@@ -17,10 +17,17 @@ import flet as ft
 
 def main(pagina): # Criar a funcção main
     texto = ft.Text("Hashzap")
+
+    popup = ft.AlertDialog()
+
     def abrir_popup(evento):
-        pass
+        pagina.dialog = popup
+        popup.open = True
+        # Sempre que editar a página, tem que fazer um update
+        pagina.update()
 
     botao_iniciar = ft.ElevatedButton("Iniciar Chat", on_click=abrir_popup)
+    
     pagina.add(texto)
     pagina.add(botao_iniciar)
 
