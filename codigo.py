@@ -19,7 +19,13 @@ def main(pagina): # Criar a funcção main
     texto = ft.Text("Hashzap")
 
     def entrar_chat(evento):
-        print("Entrar no chat")
+        popup.open=False # Fechar o popup
+        pagina.remove(botao_iniciar) # Tirar o botão iniciar chat
+        pagina.remove(texto) # Titar o titulo Hashzap
+        # Criar o Chat
+        # colocar o campo de digitar mensagem
+        # criar o botão de enviar
+        pagina.update()
 
     titulo_popup = ft.Text("Bem vindo ao Hashzap")
     nome_usuario = ft.TextField(label="Escreva o seu nome no chat")
