@@ -18,14 +18,23 @@ import flet as ft
 def main(pagina): # Criar a funcção main
     texto = ft.Text("Hashzap")
 
+    chat = ft.Column()
+    
+    def enviar_mensagem(evento):
+        print("Enviar mensagem")
+
+
+    mensagem = ft. TextField(label="Digite sua mensagem")
+    botao_enviar = ft.ElevatedButton("Enviar", on_click=enviar_mensagem)
+
     def entrar_chat(evento):
         popup.open=False # Fechar o popup
         pagina.remove(botao_iniciar) # Tirar o botão iniciar chat
         pagina.remove(texto) # Titar o titulo Hashzap
-        # Criar o Chat
-        # colocar o campo de digitar mensagem
-        # criar o botão de enviar
-        pagina.update()
+        pagina.add(chat) # Criar o Chat
+        pagina.add(mensagem) # colocar o campo de digitar mensagem
+        pagina.add(botao_enviar) # criar o botão de enviar
+        pagina.update() # Atualizar Página
 
     titulo_popup = ft.Text("Bem vindo ao Hashzap")
     nome_usuario = ft.TextField(label="Escreva o seu nome no chat")
