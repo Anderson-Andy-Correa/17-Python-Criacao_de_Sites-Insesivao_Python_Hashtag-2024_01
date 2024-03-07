@@ -21,7 +21,10 @@ def main(pagina): # Criar a funcção main
     chat = ft.Column()
 
     def enviar_mensagem(evento):
-        print("Enviar mensagem")
+        texto_mensagem = ft.Text(campo_mensagem.value)
+        chat.controls.append(texto_mensagem) # Adicione uma mensagem no chat
+        campo_mensagem.value = "" # Limpar o campo de mensagem
+        pagina.update() # Atualizar pagina
 
 
     campo_mensagem = ft. TextField(label="Digite sua mensagem")
@@ -33,10 +36,10 @@ def main(pagina): # Criar a funcção main
         pagina.remove(botao_iniciar) # Tirar o botão iniciar chat
         pagina.remove(texto) # Titar o titulo Hashzap
         pagina.add(chat) # Criar o Chat
-        texto_entrada = ft.Text("Andy entrou no chat")
-        chat.controls.append(texto_entrada)
-         # colocar o campo de digitar mensagem
-         # criar o botão de enviar
+        texto_entrada = ft.Text(f"{nome_usuario.value} entrou no chat")
+        chat.controls.append(texto_entrada) # Mensagem de entrada
+        # colocar o campo de digitar mensagem
+        # criar o botão de enviar
         pagina.add(linha_enviar)
         pagina.update() # Atualizar Página
 
