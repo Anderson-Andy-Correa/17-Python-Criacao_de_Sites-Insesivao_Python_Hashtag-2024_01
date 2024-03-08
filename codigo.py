@@ -20,14 +20,21 @@ def main(pagina): # Criar a funcção main
 
     chat = ft.Column()
 
+    def enviar_mensagem_tunel(mensagem): # Função do túnel de comunicação
+        print(mensagem)
+
+
+    pagina.pubsub.subscribe(enviar_mensagem_tunel) # Configurar o túnel de comunicação
+
     def enviar_mensagem(evento):
+        pagina.pubsub.send_all("Envindo mensagem pelo Túnel")
         texto_mensagem = ft.Text(campo_mensagem.value)
         chat.controls.append(texto_mensagem) # Adicione uma mensagem no chat
         campo_mensagem.value = "" # Limpar o campo de mensagem
         pagina.update() # Atualizar pagina
 
 
-    campo_mensagem = ft. TextField(label="Digite sua mensagem")
+    campo_mensagem = ft.TextField(label="Digite sua mensagem")
     botao_enviar = ft.ElevatedButton("Enviar", on_click=enviar_mensagem)
     linha_enviar = ft.Row([campo_mensagem, botao_enviar])
 
@@ -66,4 +73,4 @@ def main(pagina): # Criar a funcção main
     pagina.add(texto)
     pagina.add(botao_iniciar)
 
-ft.app(target=main) # Criar o app chamando a função principal
+ft.app(target=main, view=ft.WEB_BROWSER) # Criar o app chamando a função principal
