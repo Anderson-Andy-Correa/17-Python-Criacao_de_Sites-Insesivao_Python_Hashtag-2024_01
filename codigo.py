@@ -21,20 +21,20 @@ def main(pagina): # Criar a funcção main
     chat = ft.Column()
 
     def enviar_mensagem_tunel(mensagem): # Função do túnel de comunicação
-        print(mensagem)
+        texto_mensagem = ft.Text(mensagem)
+        chat.controls.append(texto_mensagem) # Adicione uma mensagem no chat
+        pagina.update()
 
 
     pagina.pubsub.subscribe(enviar_mensagem_tunel) # Configurar o túnel de comunicação
 
     def enviar_mensagem(evento):
-        pagina.pubsub.send_all("Envindo mensagem pelo Túnel")
-        texto_mensagem = ft.Text(campo_mensagem.value)
-        chat.controls.append(texto_mensagem) # Adicione uma mensagem no chat
+        pagina.pubsub.send_all(f"{nome_usuario.value}: {campo_mensagem.value}") # Enviar para todos os usuários
         campo_mensagem.value = "" # Limpar o campo de mensagem
         pagina.update() # Atualizar pagina
 
 
-    campo_mensagem = ft.TextField(label="Digite sua mensagem")
+    campo_mensagem = ft.TextField(label="Digite sua mensagem", on_submit=enviar_mensagem)
     botao_enviar = ft.ElevatedButton("Enviar", on_click=enviar_mensagem)
     linha_enviar = ft.Row([campo_mensagem, botao_enviar])
 
@@ -43,8 +43,7 @@ def main(pagina): # Criar a funcção main
         pagina.remove(botao_iniciar) # Tirar o botão iniciar chat
         pagina.remove(texto) # Titar o titulo Hashzap
         pagina.add(chat) # Criar o Chat
-        texto_entrada = ft.Text(f"{nome_usuario.value} entrou no chat")
-        chat.controls.append(texto_entrada) # Mensagem de entrada
+        pagina.pubsub.send_all(f"{nome_usuario.value} entrou no chat")
         # colocar o campo de digitar mensagem
         # criar o botão de enviar
         pagina.add(linha_enviar)
@@ -52,7 +51,7 @@ def main(pagina): # Criar a funcção main
 
 
     titulo_popup = ft.Text("Bem vindo ao Hashzap")
-    nome_usuario = ft.TextField(label="Escreva o seu nome no chat")
+    nome_usuario = ft.TextField(label="Escreva o seu nome no chat", on_submit=entrar_chat)
     botao_entrar = ft.ElevatedButton('Entrar no chat', on_click=entrar_chat)
     popup = ft.AlertDialog(
         open=False,
